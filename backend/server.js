@@ -1,20 +1,28 @@
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 const dns = require('dns');
 dns.setServers(['8.8.8.8', '1.1.1.1']);
 
+const connectDB = require("./config/db");
 
-mongoose.connect("mongodb+srv://mayankyarnagula_db_user:Api@hospital.gxwuajf.mongodb.net/?appName=hospital")
-.then(()=>{
-    console.log("db connected")
-})
+const authRoutes = require("./routes/authRoutes");
+const doctorRoutes = require("./routes/doctorRoutes");
+const appointmentRoutes = require("./routes/appointmentRoutes");
 
+const app = express();
 
-app.get('/',(req,res)=>{
-    res.send("Hello World")
-})
+connectDB();
 
-app.listen(6000,()=>{
-    console.log("server started")
-})
+app.use(cors());
+app.use(express.json());
+
+app.use("/api/auth", authRoutes);
+app.use("/api/doctors", doctorRoutes);
+app.use("/api/appointments", appointmentRoutes);
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

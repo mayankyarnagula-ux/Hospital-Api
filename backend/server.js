@@ -16,6 +16,25 @@ connectDB();
 
 app.use(cors());
 app.use(express.json());
+app.get("/", async (req, res) => {
+  try {
+    const users = await User.find();
+    const doctors = await Doctor.find();
+    const appointments = await Appointment.find()
+      .populate("patientId")
+      .populate("doctorId");
+
+    res.json({
+      users,
+      doctors,
+      appointments,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/doctors", doctorRoutes);

@@ -18,7 +18,7 @@ function Footer() {
         </div>
         <div className="footer-section">
           <h3>Contact Info</h3>
-          <p>📞 +1-800-HEALTH-1</p>
+          <p>📞 +91 7981892752</p>
           <p>📧 info@healthcareplus.com</p>
           <p>📍 123 Medical Center, Healthcare City</p>
         </div>
@@ -27,7 +27,7 @@ function Footer() {
           <div className="social-links">
             <a href="#facebook">Facebook</a>
             <a href="#twitter">Twitter</a>
-            <a href="#instagram">Instagram</a>
+            <a href="#https://www.instagram.com/mayank.rao_yarnagula?igsh=MTQzbTdqMjkyeG9hYw==">Instagram</a>
           </div>
         </div>
       </div>

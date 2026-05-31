@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Auth.css";
 
@@ -6,9 +7,14 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const loginUser = async (e) => {
     e.preventDefault();
+    setMessage(null);
+    setError(null);
 
     try {
       const res = await axios.post(
@@ -19,16 +25,26 @@ function Login() {
         }
       );
 
-      alert(res.data.message);
+      setMessage(res.data.message || "Login successful.");
       localStorage.setItem("token", res.data.token);
-    } catch (error) {
-      console.log(error);
+      setTimeout(() => {
+        navigate("/patient");
+      }, 500);
+    } catch (err) {
+      const invalidMessage =
+        err?.response?.data?.message ||
+        "Invalid email or password. Please try again.";
+      setError(invalidMessage);
+      console.error(err);
     }
   };
 
   return (
     <form onSubmit={loginUser} className="auth-form">
       <h2>Login</h2>
+
+      {message && <div className="auth-success">{message}</div>}
+      {error && <div className="auth-error">{error}</div>}
 
       <input
         type="email"
@@ -56,7 +72,7 @@ function Login() {
       <br />
       <br />
 
-      <button>Login</button>
+      <button type="submit">Login</button>
     </form>
   );
 }

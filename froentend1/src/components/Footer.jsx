@@ -27,7 +27,7 @@ function Footer() {
           <div className="social-links">
             <a href="#facebook">Facebook</a>
             <a href="#twitter">Twitter</a>
-            <a href="#https://www.instagram.com/mayank.rao_yarnagula?igsh=MTQzbTdqMjkyeG9hYw==">Instagram</a>
+            <a href="https://www.instagram.com/mayank.rao_yarnagula?igsh=MTQzbTdqMjkyeG9hYw==">Instagram</a>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Auth.css";
 
@@ -7,13 +8,18 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const registerUser = async (e) => {
     e.preventDefault();
+    setMessage(null);
+    setError(null);
 
     try {
       const res = await axios.post(
-        "http://localhost:5000",
+        "https://hospital-api-back.onrender.com/api/auth/register",
         {
           name,
           email,
@@ -21,15 +27,25 @@ function Register() {
         }
       );
 
-      alert(res.data.message);
-    } catch (error) {
-      console.log(error);
+      setMessage(res.data.message || "Registration successful.");
+      setTimeout(() => {
+        navigate("/login");
+      }, 800);
+    } catch (err) {
+      const msg =
+        err?.response?.data?.message ||
+        "Registration failed. Please check your details and try again.";
+      setError(msg);
+      console.error(err);
     }
   };
 
   return (
     <form onSubmit={registerUser} className="auth-form">
       <h2>Register</h2>
+
+      {message && <div className="auth-success">{message}</div>}
+      {error && <div className="auth-error">{error}</div>}
 
       <input
         type="text"
@@ -66,7 +82,7 @@ function Register() {
       <br />
       <br />
 
-      <button>Register</button>
+      <button type="submit">Register</button>
     </form>
   );
 }

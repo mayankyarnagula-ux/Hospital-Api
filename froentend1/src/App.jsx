@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import PrivateRoute from "./components/privateRoute";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -27,8 +28,8 @@ function App() {
         <Route path="/doctors" element={<Doctors />} />
         <Route path="/doctor/:id" element={<DoctorDetails />} />
         <Route path="/book/:id" element={<BookAppointment />} />
-        <Route path="/patient" element={<PatientDashboard />} />
-        <Route path="/history" element={<AppointmentHistory />} />
+        <Route path="/patient" element={<PrivateRoute><PatientDashboard /></PrivateRoute>} />
+        <Route path="/history" element={<PrivateRoute><AppointmentHistory /></PrivateRoute>} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
         <Route path="/contact" element={<Contact />} />

@@ -62,6 +62,26 @@
 
 .auth-form button:hover { opacity: 0.95; }
 
+.auth-success,
+.auth-error {
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.auth-success {
+  background: #e6ffed;
+  color: #1f6f3a;
+  border: 1px solid #8de0aa;
+}
+
+.auth-error {
+  background: #ffe7e9;
+  color: #a41d2f;
+  border: 1px solid #f2a0ab;
+}
+
 @media (max-width: 480px) {
   .auth-form { padding: 16px; margin: 12px; }
 }

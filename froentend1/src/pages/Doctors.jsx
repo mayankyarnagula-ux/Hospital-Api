@@ -11,7 +11,7 @@ function Doctors() {
 
   const getDoctors = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/doctors");
+      const res = await axios.get("https://hospital-api-back.onrender.com/api/doctors");
       setDoctors(res.data);
     } catch (error) {
       console.log(error);

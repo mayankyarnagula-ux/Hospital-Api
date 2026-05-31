@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Auth.css";
 
@@ -27,8 +27,9 @@ function Login() {
 
       setMessage(res.data.message || "Login successful.");
       localStorage.setItem("token", res.data.token);
+      window.dispatchEvent(new Event("authChange"));
       setTimeout(() => {
-        navigate("/patient");
+        navigate("/home");
       }, 500);
     } catch (err) {
       const invalidMessage =
@@ -73,6 +74,10 @@ function Login() {
       <br />
 
       <button type="submit">Login</button>
+
+      <p style={{ marginTop: 12, fontSize: 14, textAlign: "center" }}>
+        New here? <Link to="/register">Register now</Link>
+      </p>
     </form>
   );
 }

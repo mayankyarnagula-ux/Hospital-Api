@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -10,29 +10,43 @@ import Register from "./pages/Register";
 import Doctors from "./pages/Doctors";
 import DoctorDetails from "./pages/DoctorDetails";
 import BookAppointment from "./pages/BookAppointment";
-import patientDashboard from "./pages/patientDashboard";
+import PatientDashboard from "./pages/PatientDashboard";
 import AppointmentHistory from "./pages/AppointmentHistory";
 import AdminDashboard from "./pages/AdminDashboard";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import Contact from "./pages/Contact";
 
 function App() {
+  const isAuthenticated = !!localStorage.getItem("token");
+
   return (
     <BrowserRouter>
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/doctors" element={<Doctors />} />
-        <Route path="/doctor/:id" element={<DoctorDetails />} />
-        <Route path="/book/:id" element={<BookAppointment />} />
-        <Route path="/patient" element={<PrivateRoute><patientDashboard /></PrivateRoute>} />
+        <Route
+          path="/"
+          element={
+            isAuthenticated ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />
+          }
+        />
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/home" replace /> : <Login />}
+        />
+        <Route
+          path="/register"
+          element={isAuthenticated ? <Navigate to="/home" replace /> : <Register />}
+        />
+        <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
+        <Route path="/doctors" element={<PrivateRoute><Doctors /></PrivateRoute>} />
+        <Route path="/doctor/:id" element={<PrivateRoute><DoctorDetails /></PrivateRoute>} />
+        <Route path="/book/:id" element={<PrivateRoute><BookAppointment /></PrivateRoute>} />
+        <Route path="/patient" element={<PrivateRoute><PatientDashboard /></PrivateRoute>} />
         <Route path="/history" element={<PrivateRoute><AppointmentHistory /></PrivateRoute>} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={<PrivateRoute><Contact /></PrivateRoute>} />
       </Routes>
       
       <Footer />

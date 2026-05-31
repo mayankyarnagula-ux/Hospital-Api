@@ -12,7 +12,7 @@ function BookAppointment() {
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
-        "http://localhost:5000",
+        "https://hospital-api-back.onrender.com/api/appointments",
         {
           doctorId: id,
           date,

@@ -10,7 +10,7 @@ import Register from "./pages/Register";
 import Doctors from "./pages/Doctors";
 import DoctorDetails from "./pages/DoctorDetails";
 import BookAppointment from "./pages/BookAppointment";
-import PatientDashboard from "./pages/PatientDashboard";
+import patientDashboard from "./pages/patientDashboard";
 import AppointmentHistory from "./pages/AppointmentHistory";
 import AdminDashboard from "./pages/AdminDashboard";
 import DoctorDashboard from "./pages/DoctorDashboard";
@@ -28,7 +28,7 @@ function App() {
         <Route path="/doctors" element={<Doctors />} />
         <Route path="/doctor/:id" element={<DoctorDetails />} />
         <Route path="/book/:id" element={<BookAppointment />} />
-        <Route path="/patient" element={<PrivateRoute><PatientDashboard /></PrivateRoute>} />
+        <Route path="/patient" element={<PrivateRoute><patientDashboard /></PrivateRoute>} />
         <Route path="/history" element={<PrivateRoute><AppointmentHistory /></PrivateRoute>} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/doctor-dashboard" element={<DoctorDashboard />} />

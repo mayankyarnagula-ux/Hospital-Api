@@ -1,4 +1,4 @@
-function PatientDashboard() {
+function patientDashboard() {
   return (
     <div style={{ padding: "20px" }}>
       <h2>Patient Dashboard</h2>
@@ -8,4 +8,4 @@ function PatientDashboard() {
   );
 }
 
-export default PatientDashboard;
+export default patientDashboard;

@@ -4,25 +4,24 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <div className="home-container">
-      {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
-          <h1>HealthCare Plus</h1>
-          <p>Your Trusted Multispecialty Hospital</p>
-          <p className="hero-subtitle">Quality healthcare at your fingertips</p>
+          <h1>Welcome to HealthCare Plus</h1>
+          <p>Your trusted health companion after login.</p>
+          <p className="hero-subtitle">Book appointments, view doctors, and manage your care in one place.</p>
           <div className="hero-buttons">
             <Link to="/doctors" className="btn btn-primary">
               Find a Doctor
             </Link>
-            <Link to="/contact" className="btn btn-secondary">
-              Contact Us
+            <Link to="/patient" className="btn btn-secondary">
+              My Dashboard
             </Link>
           </div>
         </div>
         <div className="hero-image">
-          <img 
-            src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop" 
-            alt="Modern Hospital" 
+          <img
+            src="https://images.unsplash.com/photo-1580281657521-62bcd86aa8b3?w=900&h=600&fit=crop"
+            alt="Healthcare team"
           />
         </div>
       </section>
@@ -94,6 +93,32 @@ function Home() {
         <Link to="/doctors" className="btn btn-large">
           Get Started Now
         </Link>
+      </section>
+
+      <section className="dashboard-section">
+        <h2>Quick Access</h2>
+        <div className="dashboard-grid">
+          <Link to="/doctors" className="dashboard-card">
+            <div className="dashboard-icon">👨‍⚕️</div>
+            <h3>Doctors</h3>
+            <p>Browse specialists and choose your preferred doctor.</p>
+          </Link>
+          <Link to="/patient" className="dashboard-card">
+            <div className="dashboard-icon">📋</div>
+            <h3>Patient Dashboard</h3>
+            <p>View your profile, upcoming bookings, and health history.</p>
+          </Link>
+          <Link to="/history" className="dashboard-card">
+            <div className="dashboard-icon">🕒</div>
+            <h3>Appointment History</h3>
+            <p>Track your previous visits and appointment details.</p>
+          </Link>
+          <Link to="/contact" className="dashboard-card">
+            <div className="dashboard-icon">✉️</div>
+            <h3>Contact Us</h3>
+            <p>Get help or ask questions from our support team.</p>
+          </Link>
+        </div>
       </section>
     </div>
   );

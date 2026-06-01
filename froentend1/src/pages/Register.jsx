@@ -41,8 +41,8 @@ function Register() {
   };
 
   return (
-    <form onSubmit={registerUser} className="auth-form">
-      <h2>Register</h2>
+      <form onSubmit={registerUser} className="auth-form">
+       <h2>Register</h2>
 
       {message && <div className="auth-success">{message}</div>}
       {error && <div className="auth-error">{error}</div>}
@@ -87,7 +87,7 @@ function Register() {
       <p style={{ marginTop: 12, fontSize: 14, textAlign: "center" }}>
         Already have an account? <Link to="/login">Login here</Link>
       </p>
-    </form>
+      </form>
   );
 }
 

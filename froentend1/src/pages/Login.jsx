@@ -41,8 +41,8 @@ function Login() {
   };
 
   return (
-    <form onSubmit={loginUser} className="auth-form">
-      <h2>Login</h2>
+      <form onSubmit={loginUser} className="auth-form">
+       <h2>Login</h2>
 
       {message && <div className="auth-success">{message}</div>}
       {error && <div className="auth-error">{error}</div>}
@@ -78,7 +78,7 @@ function Login() {
       <p style={{ marginTop: 12, fontSize: 14, textAlign: "center" }}>
         New here? <Link to="/register">Register now</Link>
       </p>
-    </form>
+      </form>
   );
 }
 

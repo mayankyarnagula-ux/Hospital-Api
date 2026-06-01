@@ -35,6 +35,9 @@ function Navbar() {
                 <Link to="/doctors" className="nav-link">Doctors</Link>
               </li>
               <li className="nav-item">
+                <Link to="/admin" className="nav-link">Admin</Link>
+              </li>
+              <li className="nav-item">
                 <Link to="/patient" className="nav-link">Patient Dashboard</Link>
               </li>
               <li className="nav-item">

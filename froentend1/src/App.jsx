@@ -7,6 +7,7 @@ import PrivateRoute from "./components/privateRoute";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AuthLanding from "./pages/AuthLanding";
 import Doctors from "./pages/Doctors";
 import DoctorDetails from "./pages/DoctorDetails";
 import BookAppointment from "./pages/BookAppointment";
@@ -21,14 +22,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
+      {isAuthenticated && <Navbar />}
 
       <Routes>
         <Route
           path="/"
-          element={
-            isAuthenticated ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />
-          }
+          element={isAuthenticated ? <Navigate to="/home" replace /> : <AuthLanding />}
         />
         <Route
           path="/login"
@@ -44,12 +43,12 @@ function App() {
         <Route path="/book/:id" element={<PrivateRoute><BookAppointment /></PrivateRoute>} />
         <Route path="/patient" element={<PrivateRoute><PatientDashboard /></PrivateRoute>} />
         <Route path="/history" element={<PrivateRoute><AppointmentHistory /></PrivateRoute>} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+        <Route path="/admin" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
+        <Route path="/doctor-dashboard" element={<PrivateRoute><DoctorDashboard /></PrivateRoute>} />
         <Route path="/contact" element={<PrivateRoute><Contact /></PrivateRoute>} />
       </Routes>
       
-      <Footer />
+      {isAuthenticated && <Footer />}
     </BrowserRouter>
   );
 }

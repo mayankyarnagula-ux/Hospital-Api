@@ -1,13 +1,24 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
+const Doctor = require("../models/Doctor");
 
-const {
-  getDoctors,
-  getDoctorById,
-  addDoctor,
-} = require("../controllers/doctorController");
+router.get("/", async (req, res) => {
+  const doctors = await Doctor.find();
+  res.json(doctors);
+});
 
-router.get("/", getDoctors);
-router.get("/", getDoctorById);
-router.post("/", addDoctor);
+router.get("/:id", async (req, res) => {
+  try {
+    const doctor = await Doctor.findById(req.params.id);
+
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+
+    res.json(doctor);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 module.exports = router;

@@ -27,10 +27,9 @@ function Login() {
 
       setMessage(res.data.message || "Login successful.");
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
       window.dispatchEvent(new Event("authChange"));
-      setTimeout(() => {
-        navigate("/home");
-      }, 500);
+      navigate("/home", { replace: true });
     } catch (err) {
       const invalidMessage =
         err?.response?.data?.message ||

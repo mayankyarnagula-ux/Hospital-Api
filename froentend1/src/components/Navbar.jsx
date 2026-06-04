@@ -4,12 +4,20 @@ import "./Navbar.css";
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleAuthChange = () => setIsLoggedIn(!!localStorage.getItem("token"));
-    window.addEventListener("authChange", handleAuthChange);
-    return () => window.removeEventListener("authChange", handleAuthChange);
+    const updateAuthState = () => {
+      const token = !!localStorage.getItem("token");
+      const user = JSON.parse(localStorage.getItem("user") || "null");
+      setIsLoggedIn(token);
+      setIsAdmin(user?.role === "admin");
+    };
+
+    updateAuthState();
+    window.addEventListener("authChange", updateAuthState);
+    return () => window.removeEventListener("authChange", updateAuthState);
   }, []);
 
   const logout = () => {
@@ -34,9 +42,11 @@ function Navbar() {
               <li className="nav-item">
                 <Link to="/doctors" className="nav-link">Doctors</Link>
               </li>
-              <li className="nav-item">
-                <Link to="/admin" className="nav-link">Admin</Link>
-              </li>
+              {isAdmin && (
+                <li className="nav-item">
+                  <Link to="/admin" className="nav-link">Admin</Link>
+                </li>
+              )}
               <li className="nav-item">
                 <Link to="/patient" className="nav-link">Patient Dashboard</Link>
               </li>

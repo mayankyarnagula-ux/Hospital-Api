@@ -37,10 +37,9 @@ function Register() {
 
       setMessage("Registration successful. Redirecting to home...");
       localStorage.setItem("token", loginRes.data.token);
+      localStorage.setItem("user", JSON.stringify(loginRes.data.user));
       window.dispatchEvent(new Event("authChange"));
-      setTimeout(() => {
-        navigate("/home");
-      }, 700);
+      navigate("/home", { replace: true });
     } catch (err) {
       const msg =
         err?.response?.data?.message ||
@@ -99,7 +98,7 @@ function Register() {
 
             <div className="auth-switch-line">
               <span>Already have an account?</span>
-              <Link to="/login">Login here</Link>
+              <Link to="/login">Login </Link>
             </div>
           </form>
         </div>

@@ -43,7 +43,7 @@ function App() {
         <Route path="/book/:id" element={<PrivateRoute><BookAppointment /></PrivateRoute>} />
         <Route path="/patient" element={<PrivateRoute><PatientDashboard /></PrivateRoute>} />
         <Route path="/history" element={<PrivateRoute><AppointmentHistory /></PrivateRoute>} />
-        <Route path="/admin" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
+        <Route path="/admin" element={<PrivateRoute allowedRoles={["admin"]}><AdminDashboard /></PrivateRoute>} />
         <Route path="/doctor-dashboard" element={<PrivateRoute><DoctorDashboard /></PrivateRoute>} />
         <Route path="/contact" element={<PrivateRoute><Contact /></PrivateRoute>} />
       </Routes>

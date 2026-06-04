@@ -9,8 +9,14 @@ function AppointmentHistory() {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
+        const token = localStorage.getItem("token");
         const res = await axios.get(
-          "https://hospital-api-back.onrender.com/api/appointments"
+          "https://hospital-api-back.onrender.com/api/appointments",
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
         );
         setAppointments(res.data || []);
       } catch (err) {

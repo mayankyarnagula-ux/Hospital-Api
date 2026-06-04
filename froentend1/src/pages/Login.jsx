@@ -41,44 +41,51 @@ function Login() {
   };
 
   return (
-      <form onSubmit={loginUser} className="auth-form">
-       <h2>Login</h2>
+    <div className="auth-page">
+      <div className="auth-landing-centered">
+        <div className="auth-form-container">
+          <form onSubmit={loginUser} className="auth-form">
+            <h2>Login</h2>
 
-      {message && <div className="auth-success">{message}</div>}
-      {error && <div className="auth-error">{error}</div>}
+            {message && <div className="auth-success">{message}</div>}
+            {error && <div className="auth-error">{error}</div>}
 
-      <input
-        type="email"
-        placeholder="Enter Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
+            <input
+              type="email"
+              placeholder="Enter Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-      <br />
-      <br />
+            <br />
+            <br />
 
-      <div className="password-field">
-        <input
-          type={showPassword ? "text" : "password"}
-          placeholder="Enter Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <span
-          className="password-toggle"
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? "👁️" : "👁️‍🗨️"}
-        </span>
+            <div className="password-field">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <span
+                className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "👁️" : "👁️‍🗨️"}
+              </span>
+            </div>
+
+            <br />
+            <br />
+
+            <button type="submit">Login</button>
+
+            <div className="auth-switch-line">
+              <span>New here?</span>
+              <Link to="/register">Register now</Link>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <br />
-      <br />
-
-      <button type="submit">Login</button>
-
-      <p style={{ marginTop: 12, fontSize: 14, textAlign: "center" }}>
-        New here? <Link to="/register">Register now</Link>
-      </p>
-      </form>
+    </div>
   );
 }
 

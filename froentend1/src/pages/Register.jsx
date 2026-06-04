@@ -18,7 +18,7 @@ function Register() {
     setError(null);
 
     try {
-      const res = await axios.post(
+      await axios.post(
         "https://hospital-api-back.onrender.com/api/auth/register",
         {
           name,
@@ -27,10 +27,20 @@ function Register() {
         }
       );
 
-      setMessage(res.data.message || "Registration successful.");
+      const loginRes = await axios.post(
+        "https://hospital-api-back.onrender.com/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+
+      setMessage("Registration successful. Redirecting to home...");
+      localStorage.setItem("token", loginRes.data.token);
+      window.dispatchEvent(new Event("authChange"));
       setTimeout(() => {
-        navigate("/login");
-      }, 800);
+        navigate("/home");
+      }, 700);
     } catch (err) {
       const msg =
         err?.response?.data?.message ||
@@ -41,53 +51,60 @@ function Register() {
   };
 
   return (
-      <form onSubmit={registerUser} className="auth-form">
-       <h2>Register</h2>
+    <div className="auth-page">
+      <div className="auth-landing-centered">
+        <div className="auth-form-container">
+          <form onSubmit={registerUser} className="auth-form">
+            <h2>Register</h2>
 
-      {message && <div className="auth-success">{message}</div>}
-      {error && <div className="auth-error">{error}</div>}
+            {message && <div className="auth-success">{message}</div>}
+            {error && <div className="auth-error">{error}</div>}
 
-      <input
-        type="text"
-        placeholder="Enter Name"
-        onChange={(e) => setName(e.target.value)}
-      />
+            <input
+              type="text"
+              placeholder="Enter Name"
+              onChange={(e) => setName(e.target.value)}
+            />
 
-      <br />
-      <br />
+            <br />
+            <br />
 
-      <input
-        type="email"
-        placeholder="Enter Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
+            <input
+              type="email"
+              placeholder="Enter Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-      <br />
-      <br />
+            <br />
+            <br />
 
-      <div className="password-field">
-        <input
-          type={showPassword ? "text" : "password"}
-          placeholder="Enter Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <span
-          className="password-toggle"
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? "👁️" : "👁️‍🗨️"}
-        </span>
+            <div className="password-field">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <span
+                className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "👁️" : "👁️‍🗨️"}
+              </span>
+            </div>
+
+            <br />
+            <br />
+
+            <button type="submit">Register</button>
+
+            <div className="auth-switch-line">
+              <span>Already have an account?</span>
+              <Link to="/login">Login here</Link>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <br />
-      <br />
-
-      <button type="submit">Register</button>
-
-      <p style={{ marginTop: 12, fontSize: 14, textAlign: "center" }}>
-        Already have an account? <Link to="/login">Login here</Link>
-      </p>
-      </form>
+    </div>
   );
 }
 

@@ -47,27 +47,103 @@ function DoctorDetails() {
   if (loading) return <div style={{ padding: "20px" }}><h3>Loading...</h3></div>;
   if (!doctor) return <div style={{ padding: "20px" }}><h3>No doctor details available.</h3></div>;
 
+  const imageUrl =
+    doctor.image ||
+    doctor.photo ||
+    doctor.avatar ||
+    `https://via.placeholder.com/520x520?text=${encodeURIComponent(doctor.name || "Doctor")}`;
+
   return (
     <div style={{ padding: "20px" }}>
       <h2>Doctor Details</h2>
 
-      <p><strong>Name:</strong> {doctor.name || "N/A"}</p>
-      <p><strong>Specialization:</strong> {doctor.specialization || "N/A"}</p>
-      <p><strong>Experience:</strong> {doctor.experience ? `${doctor.experience} years` : "N/A"}</p>
-      <p><strong>Fees:</strong> {doctor.fees ? `₹${doctor.fees}` : "N/A"}</p>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 24,
+          marginTop: 20,
+          alignItems: "flex-start",
+        }}
+      >
+        <div
+          style={{
+            flex: "1 1 320px",
+            maxWidth: 360,
+            borderRadius: 18,
+            overflow: "hidden",
+            boxShadow: "0 16px 32px rgba(0, 0, 0, 0.08)",
+            background: "#ffffff",
+          }}
+        >
+          <img
+            src={imageUrl}
+            alt={doctor.name || "Doctor"}
+            style={{ width: "100%", height: 320, objectFit: "cover" }}
+          />
+        </div>
 
-      {/* show any other fields present */}
-      <div style={{ marginTop: 12 }}>
-        {Object.keys(doctor)
-          .filter((k) => !["_id", "id", "name", "specialization", "experience", "fees", "__v"].includes(k))
-          .map((key) => (
-            <p key={key}><strong>{key.replace(/_/g, " ")}:</strong> {String(doctor[key] ?? "N/A")}</p>
-          ))}
+        <div
+          style={{
+            flex: "2 1 420px",
+            minWidth: 280,
+            maxWidth: 760,
+          }}
+        >
+          <div
+            style={{
+              padding: 24,
+              borderRadius: 18,
+              background: "#ffffff",
+              boxShadow: "0 14px 30px rgba(0, 0, 0, 0.05)",
+            }}
+          >
+            <p style={{ marginBottom: 12 }}>
+              <strong>Name:</strong> {doctor.name || "N/A"}
+            </p>
+            <p style={{ marginBottom: 12 }}>
+              <strong>Specialization:</strong> {doctor.specialization || "N/A"}
+            </p>
+            <p style={{ marginBottom: 12 }}>
+              <strong>Experience:</strong>{" "}
+              {doctor.experience ? `${doctor.experience} years` : "N/A"}
+            </p>
+            <p style={{ marginBottom: 20 }}>
+              <strong>Fees:</strong>{" "}
+              {doctor.fees ? `₹${doctor.fees}` : "N/A"}
+            </p>
+
+            {Object.keys(doctor)
+              .filter(
+                (k) =>
+                  !["_id", "id", "name", "specialization", "experience", "fees", "__v", "image", "photo", "avatar"].includes(k)
+              )
+              .map((key) => (
+                <p key={key} style={{ marginBottom: 10 }}>
+                  <strong>{key.replace(/_/g, " ")}:</strong>{" "}
+                  {String(doctor[key] ?? "N/A")}
+                </p>
+              ))}
+
+            <Link to={`/book/${doctor._id}`}>
+              <button
+                style={{
+                  marginTop: 16,
+                  padding: "12px 18px",
+                  borderRadius: 10,
+                  border: "none",
+                  background: "#007bff",
+                  color: "white",
+                  cursor: "pointer",
+                  fontWeight: 600,
+                }}
+              >
+                Book Appointment
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
-
-      <Link to={`/book/${doctor._id}`}>
-        <button style={{ marginTop: 14 }}>Book Appointment</button>
-      </Link>
     </div>
   );
 }

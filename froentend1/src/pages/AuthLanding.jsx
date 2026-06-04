@@ -1,28 +1,20 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Login from "./Login";
-import Register from "./Register";
 import "./Auth.css";
 
 function AuthLanding() {
-  return (
-    <div className="auth-landing">
-      <div className="auth-landing-inner">
-        <div className="auth-left">
-          <h1>Welcome to HealthCare Plus</h1>
-          <p>Sign in to manage appointments, view doctors, and more.</p>
-        </div>
+  const navigate = useNavigate();
 
-        <div className="auth-forms">
-          <div className="auth-column">
-            <Login />
-          </div>
+  useEffect(() => {
+    // Check if user is already logged in
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
-          <div className="auth-column">
-            <Register />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <Login />;
 }
 
 export default AuthLanding;

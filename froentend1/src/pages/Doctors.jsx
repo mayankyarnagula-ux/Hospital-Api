@@ -22,9 +22,18 @@ function Doctors() {
     <div style={{ padding: "20px" }}>
       <h2>Doctors List</h2>
 
-      {doctors.map((doctor) => (
-        <DoctorCard key={doctor._id} doctor={doctor} />
-      ))}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+          gap: 20,
+          marginTop: 20,
+        }}
+      >
+        {doctors.map((doctor) => (
+          <DoctorCard key={doctor._id} doctor={doctor} />
+        ))}
+      </div>
     </div>
   );
 }

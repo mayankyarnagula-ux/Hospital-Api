@@ -11,7 +11,7 @@ import AuthLanding from "./pages/AuthLanding";
 import Doctors from "./pages/Doctors";
 import DoctorDetails from "./pages/DoctorDetails";
 import BookAppointment from "./pages/BookAppointment";
-import PatientDashboard from "./pages/PatientDashboard";
+import PatientDashboard from "./pages/patientDashboard";
 import AppointmentHistory from "./pages/AppointmentHistory";
 import AdminDashboard from "./pages/AdminDashboard";
 import DoctorDashboard from "./pages/DoctorDashboard";
